@@ -4,5 +4,6 @@ import 'app/angular-js/view2/view2.js';
 import 'app/angular-js/components/version/version.js';
 import 'app/angular-js/components/version/version-directive.js';
 import 'app/angular-js/components/version/interpolate-filter.js';
+import 'app/angular-js/service1/service1';
 
 export class Imports {}
