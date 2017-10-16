@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Downgrade } from '../hybrid/downgrade.decorator';
 
 @Downgrade()
@@ -9,5 +9,7 @@ import { Downgrade } from '../hybrid/downgrade.decorator';
 })
 export class DowngradedComponent {
 
-  constructor() { }
+  constructor(@Inject('service1') service1) {
+    console.log(service1);
+  }
 }

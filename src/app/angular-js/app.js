@@ -6,6 +6,10 @@ angular.module('myApp', [
   'myApp.view1',
   'myApp.view2',
   'myApp.version'
-]).config(['$locationProvider', '$routeProvider', function ($locationProvider) {
+]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true);
+
+  $routeProvider.when('/downgraded', {
+    template: '<app-downgraded></app-downgraded>'
+  })
 }]);

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-hybrid',
   template: `
-    <router-outlet></router-outlet>
+    <app-header></app-header>
     <div ng-view></div>
     <app-footer></app-footer>
   `
