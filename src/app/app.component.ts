@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, VERSION } from '@angular/core';
+import { Downgrade } from './hybrid/downgrade.decorator';
 
+@Downgrade()
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `<span>{{version}}</span>`
 })
 export class AppComponent {
-  title = 'app';
+
+  version = VERSION.full;
 }
