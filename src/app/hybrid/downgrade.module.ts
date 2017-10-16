@@ -39,9 +39,9 @@ export class DowngradeModule {
     }
   }
 
-  private downgrade(downedEntities: DownedEntity[], moduleName: string, downgradeWorker) {
+  private downgrade(downedEntities: DownedEntity[], moduleName: string, downgradeFn: Function) {
     downedEntities.forEach(downedEntity => {
-      downgradeWorker(downedEntity.downgradeDecorator.module || moduleName, downedEntity.originalEntity);
+      downgradeFn(downedEntity.downgradeDecorator.module || moduleName, downedEntity.originalEntity);
     });
   }
 
