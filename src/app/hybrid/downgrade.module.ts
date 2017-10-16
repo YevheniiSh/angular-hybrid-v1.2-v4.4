@@ -1,7 +1,7 @@
 import { NgModule, Type } from '@angular/core';
 import { HybridHelper } from './hybrid.helper';
-import { DowngradeDecorator } from './downgrade';
-import { DowngradeProviderConfig } from './downgrade-provider.config';
+import { DowngradeDecorator } from './downgrade.decorator';
+import { DowngradeModuleConfig } from './downgrade.module.config';
 
 declare let Reflect: any;
 
@@ -17,7 +17,7 @@ export class DowngradeModule {
   constructor(private hybridHelper: HybridHelper) {
   }
 
-  init(module: Type<any>, config: DowngradeProviderConfig): void {
+  init(module: Type<any>, config: DowngradeModuleConfig): void {
     this.hybridHelper.componentPrefix = config.componentPrefix;
 
     for (const classDecorator of Reflect.getMetadata('annotations', module)) {
