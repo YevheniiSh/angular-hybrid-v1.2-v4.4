@@ -1,16 +1,61 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { UpgradeModule } from '@angular/upgrade/static';
 
+import { HybridAppComponent } from './hybrid-app.component';
 import { AppComponent } from './app.component';
+import { DowngradeModule } from './hybrid/downgrade.module';
+import { FooterComponent } from './footer/footer.component';
+import { DowngradedComponent } from './downgrade-example/downgraded.component';
+import { RouterModule, Routes, UrlHandlingStrategy } from '@angular/router';
+
+const routes: Routes = [
+  { path: 'downgraded', component: DowngradedComponent }
+];
+
+export class Ng1Ng2UrlHandlingStrategy implements UrlHandlingStrategy {
+  shouldProcessUrl(url) {
+    return !!routes.find(route => url.toString().startsWith('/' + route.path));
+  }
+
+  extract(url) { return url; }
+
+  merge(url, whole) { return url; }
+}
 
 @NgModule({
   declarations: [
-    AppComponent
+    HybridAppComponent,
+    AppComponent,
+    FooterComponent,
+    DowngradedComponent,
   ],
   imports: [
-    BrowserModule
+    RouterModule.forRoot(routes),
+    BrowserModule,
+    UpgradeModule,
+    DowngradeModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: UrlHandlingStrategy, useClass: Ng1Ng2UrlHandlingStrategy }
+  ],
+  entryComponents: [
+    AppComponent,
+    FooterComponent,
+    DowngradedComponent
+  ],
+  bootstrap: [HybridAppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(private dp: DowngradeModule) {
+    this.dp.init(AppModule, {
+      defaultAngularJsModuleForComponents: 'myApp',
+      defaultAngularJsModuleForProviders: 'myApp',
+      componentPrefix: 'app'
+    });
+  }
+
+  ngDoBootstrap() {
+  }
+}
