@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { UpgradeModule } from '@angular/upgrade/static';
+import { UIRouterUpgradeModule } from '@uirouter/angular-hybrid';
+import { UIRouterModule, UrlService } from '@uirouter/angular/lib';
 
 import { HybridAppComponent } from './hybrid-app.component';
 import { AppComponent } from './app.component';
@@ -22,6 +24,8 @@ import { HeaderComponent } from './header/header.component';
     BrowserModule,
     UpgradeModule,
     DowngradeModule,
+    UIRouterUpgradeModule,
+    UIRouterModule.forChild()
   ],
   providers: [
     ServiceOne
@@ -31,7 +35,7 @@ import { HeaderComponent } from './header/header.component';
     FooterComponent,
     DowngradedComponent
   ],
-  bootstrap: [HybridAppComponent]
+  bootstrap: []
 })
 export class AppModule {
 
@@ -46,3 +50,5 @@ export class AppModule {
   ngDoBootstrap() {
   }
 }
+
+angular.module('myApp').config(['$urlServiceProvider', ($urlService: UrlService) => $urlService.deferIntercept()]);

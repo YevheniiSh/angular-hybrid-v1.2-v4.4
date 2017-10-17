@@ -2,14 +2,15 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute',
+  // 'ngRoute',
   'myApp.view1',
   'myApp.view2',
-  'myApp.version'
+  'myApp.version',
+  'ui.router',
+  'ui.router.upgrade'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true);
-
-  $routeProvider.when('/downgraded', {
-    template: '<app-downgraded></app-downgraded>'
-  })
+  // $routeProvider.when('/downgraded', {
+  //   template: '<app-downgraded></app-downgraded>'
+  // })
 }]);
